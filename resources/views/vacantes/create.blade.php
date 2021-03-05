@@ -189,7 +189,14 @@
             //Dropzone
 
             const dropzoneDevJobs = new Dropzone('#dropzoneDevJobs',{
-                url: "/vacantes/imagen"
+                url: "/devjobs/public/vacantes/imagen",
+                headers:{
+                    'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
+                },
+                success: function(file, response){
+                    //console.log(file);
+                    console.log(response);
+                }
             })
 
 
