@@ -2,6 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.6/dropzone.min.css" integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A==" crossorigin="anonymous" />
 @endsection
 
 @section('navegacion')
@@ -136,7 +137,18 @@
             {{--parar instanciar usamos div class="--}}
             <div class="editable p-3 bg-white rounded form-input w-full text-gray-700"></div>
 
-            <input type="hidden" name="descripcion" id="descriptcion"
+            <input type="hidden" name="descripcion" id="descriptcion"/>
+        </div>
+
+
+        <div class="mb-5">
+            <label for="" 
+            class="block text-gray-700 text-sm mb-2">
+            Imagen Vacante: 
+            </label>
+
+            {{--parar instanciar usamos div class="--}}
+            <div id="dropzoneDevJobs" class="dropzone rounded bg-white"></div>
         </div>
         
         <button
@@ -149,8 +161,15 @@
 @section('scripts')
    
     <script src="https://cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/js/medium-editor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.6/min/dropzone.min.js" integrity="sha512-KgeSi6qqjyihUcmxFn9Cwf8dehAB8FFZyl+2ijFEPyWu4ZM8ZOQ80c2so59rIdkkgsVsuTnlffjfgkiwDThewQ==" crossorigin="anonymous"></script>
+    
     <script>
+        //para quitar el error del dropzone
+        Dropzone.autoDiscover = false;
+
         document.addEventListener('DOMContentLoaded', ()=>{
+            
+            //Medium Editos
             const editor = new MediumEditor('.editable',{
                 toolbar:{
                     buttons: ['bold','italic','underline','quote','anchor','justifyLeft','justifyCenter','justifyRight','justifyFull','orderedList','unorderedList','h2','h3'],
@@ -166,6 +185,14 @@
                 const contenido = editor.getContent();
                 document.querySelector('#descripcion').value = contenido
             });
+
+            //Dropzone
+
+            const dropzoneDevJobs = new Dropzone('#dropzoneDevJobs',{
+                url: "/vacantes/imagen"
+            })
+
+
         })
     </script>
 
