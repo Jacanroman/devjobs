@@ -97,6 +97,32 @@
 
         {{--$ubicaciones--}}
 
+
+        <div class="mb-5">
+            <label for="salario" 
+            class="block text-gray-700 text-sm mb-2">
+            salario: 
+            </label>
+
+            <select
+                id="salario"
+                class="block appearance-none w-full border border-gray-200 text-gray-700 rounded leading-tight focus:outline-none focus:border-gray-500 p-3 bg-gray-100"
+                name="salario"
+            >
+                <option disabled selected>- Seleccion -</option>
+
+                @foreach($salarios as $salario)
+                    <option value="{{$salario->id}}">
+                        {{$salario->nombre}}
+                    </option>
+                    
+                @endforeach
+            </select>
+
+        </div>
+
+        {{--$salarios--}}
+
         
         <button
             type="submit"
