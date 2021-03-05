@@ -128,14 +128,15 @@
         {{--$salarios--}}
 
         <div class="mb-5">
-            <label for="salario" 
+            <label for="descripcion" 
             class="block text-gray-700 text-sm mb-2">
             Descripcion del puesto: 
             </label>
 
             {{--parar instanciar usamos div class="--}}
-            <div class="editable"></div>
+            <div class="editable p-3 bg-white rounded form-input w-full text-gray-700"></div>
 
+            <input type="hidden" name="descripcion" id="descriptcion"
         </div>
         
         <button
@@ -150,7 +151,21 @@
     <script src="https://cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/js/medium-editor.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', ()=>{
-            const editor = new MediumEditor('.editable');
+            const editor = new MediumEditor('.editable',{
+                toolbar:{
+                    buttons: ['bold','italic','underline','quote','anchor','justifyLeft','justifyCenter','justifyRight','justifyFull','orderedList','unorderedList','h2','h3'],
+                    static: true,
+                    sticky: true
+                },
+                placeholder:{
+                    text: 'Informacion de la vacante'
+                }
+            });
+
+            editor.subscribe('editableInput', function(eventObj, editable){
+                const contenido = editor.getContent();
+                document.querySelector('#descripcion').value = contenido
+            });
         })
     </script>
 
