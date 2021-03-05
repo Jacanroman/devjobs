@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+@endsection
+
 @section('navegacion')
     @include('ui.adminnav')
 @endsection
@@ -123,10 +127,32 @@
 
         {{--$salarios--}}
 
+        <div class="mb-5">
+            <label for="salario" 
+            class="block text-gray-700 text-sm mb-2">
+            Descripcion del puesto: 
+            </label>
+
+            {{--parar instanciar usamos div class="--}}
+            <div class="editable"></div>
+
+        </div>
         
         <button
             type="submit"
             class="bg-blue-500 w-full hover:bg-blue-600 text-gray-100 font-bold p-3 focus:outline focus:shadow-outline uppercase"
             >Publicar Vacante</button>
     </form>
+@endsection
+
+@section('scripts')
+   
+    <script src="https://cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/js/medium-editor.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            const editor = new MediumEditor('.editable');
+        })
+    </script>
+
+
 @endsection
