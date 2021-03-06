@@ -111,6 +111,12 @@ class VacanteController extends Controller
     {
         //return "subiendo imagen";
         $imagen = $request->file('file');
-        return $imagen->extension();
+        //return $imagen;
+        //para defenir el nombre unico lo renombramos con el timestamp
+        $nombreImagen = time() . '.' . $imagen->extension();
+
+        $imagen->move(public_path('storage/vacantes'), $nombreImagen);
+
+        return response()->json(['correcto' => $nombreImagen]);
     }
 }

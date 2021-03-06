@@ -150,6 +150,8 @@
             {{--parar instanciar usamos div class="--}}
             <div id="dropzoneDevJobs" class="dropzone rounded bg-white"></div>
         
+            <input type="hidden" name="imagen" id="imagen">
+
             <p id="error"></p>
         </div>
         
@@ -201,12 +203,16 @@
                 },
                 success: function(file, response){
                     //console.log(file);
-                    console.log(response);
+                    //console.log(response);
+                    console.log(response.correcto);
                     document.querySelector('#error').textContent = '';
+                
+                    //Coloca la respuesta del servidor en el input hidden imagen
+                    document.querySelector('#imagen').value = response.correcto;
                 },
 
                 error: function(file,response){
-                    console.log(response);
+                    console.log(file);
                     document.querySelector('#error').textContent = 'Formato no valido';
                 },
                 
