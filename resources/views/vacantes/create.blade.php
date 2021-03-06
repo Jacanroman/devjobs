@@ -149,6 +149,8 @@
 
             {{--parar instanciar usamos div class="--}}
             <div id="dropzoneDevJobs" class="dropzone rounded bg-white"></div>
+        
+            <p id="error"></p>
         </div>
         
         <button
@@ -190,13 +192,37 @@
 
             const dropzoneDevJobs = new Dropzone('#dropzoneDevJobs',{
                 url: "/devjobs/public/vacantes/imagen",
+                //determinados formatos de archivo
+                acceptedFiles: ".png,.jpg,.jpeg,.gif,.bmp",
+                addRemoveLinks: true,
+                maxFiles: 1,
                 headers:{
                     'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content
                 },
                 success: function(file, response){
                     //console.log(file);
                     console.log(response);
+                    document.querySelector('#error').textContent = '';
+                },
+
+                error: function(file,response){
+                    console.log(response);
+                    document.querySelector('#error').textContent = 'Formato no valido';
+                },
+                
+                maxfilesexceeded: function(file){
+                    if(this.file[1] !=null){
+                        //si tenemos mas de un archivos eliminamos el anterior
+                        this.removeFile(this.files[0]);
+
+                        this.addFile(file); //Agrega el nuevo archivo
+                    }
+                },
+
+                removedfile: function(file, response){
+                    console.log(file);
                 }
+
             })
 
 
