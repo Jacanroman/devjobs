@@ -187,7 +187,15 @@
             {{--parar instanciar usamos div class="--}}
             <div class="editable p-3 bg-white rounded form-input w-full text-gray-700"></div>
 
-            <input type="hidden" name="descripcion" id="descriptcion"/>
+            <input type="hidden" name="descripcion" id="descripcion" value="{{old('descripcion')}}"/>
+            
+            @error('descripcion')
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3 mb-6" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block"> {{$message}}</span>
+                </div>
+            @enderror
+        
         </div>
 
 
@@ -241,7 +249,7 @@
 
         document.addEventListener('DOMContentLoaded', ()=>{
             
-            //Medium Editos
+            //Medium Editor
             const editor = new MediumEditor('.editable',{
                 toolbar:{
                     buttons: ['bold','italic','underline','quote','anchor','justifyLeft','justifyCenter','justifyRight','justifyFull','orderedList','unorderedList','h2','h3'],
@@ -253,10 +261,14 @@
                 }
             });
 
+            //Agrega al input hidden lo que el usuario escribe en medium editor
             editor.subscribe('editableInput', function(eventObj, editable){
                 const contenido = editor.getContent();
                 document.querySelector('#descripcion').value = contenido
             });
+
+            //Llena el editor con el contenido del input hidden
+            editor.setContent(document.querySelector('#descripcion').value)
 
             //Dropzone
 
