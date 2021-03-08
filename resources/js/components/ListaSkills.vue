@@ -1,14 +1,16 @@
 <template>
-    <ul class="flex flex-wrap justify-center">
-        <li
-            class="border border-gray-500 px-10 py-3 mb-3 rounded mr-4"
-            v-for="(skill, i) in this.skills"
-            v-bind:key="i"
-        >
-        {{skill}}
-        </li>
-    </ul>
+    <div>
+        <ul class="flex flex-wrap justify-center">
+            <li
+                class="border border-gray-500 px-10 py-3 mb-3 rounded mr-4"
+                v-for="(skill, i) in this.skills"
+                v-bind:key="i"
+                v-on:click="activar($event)"
+            >{{skill}}</li>
+        </ul>
 
+        <input type="hidden" name="skills" id="skills">
+    </div>
 </template>
 
 <script>
@@ -17,6 +19,33 @@
         props: ['skills'],
         mounted(){
             console.log(this.skills)
+        },
+        data: function(){
+            return{
+                habilidades: new Set()
+            }
+        },
+        methods:{
+            activar(e){
+                //console.log('diste clik',e.target.textContent);
+                //le agregamos una clase 
+                if(e.target.classList.contains('bg-blue-400')){
+                    //El skill esta activo    
+                    e.target.classList.remove('bg-blue-400')
+
+                    //Eliminar el set de habilidades
+                    this.habilidades.delete(e.target.textContent);
+                }else{
+                    e.target.classList.add('bg-blue-400');
+
+                    //Agregar al Set de habilidades
+                    this.habilidades.add(e.target.textContent);
+                }
+
+                //Agregar la habilidades al input hiddeen
+                const stringHabilidades = [...this.habilidades];
+                document.querySelector('#skills').value = stringHabilidades;
+            }
         }
     }
 </script>
