@@ -154,12 +154,30 @@
 
             <p id="error"></p>
         </div>
+
+
+        <div class="mb-5">
+            <label for="" 
+            class="block text-gray-700 text-sm mb-2">
+            Habilidades y Conocimientos: 
+            </label>
+            
+            @php
+                $skills = ['HTML5', 'CSS3', 'CSSGrid', 'Flexbox', 'JavaScript', 'jQuery', 'Node', 'Angular', 'VueJS', 'ReactJS', 'React Hooks', 'Redux', 'Apollo', 'GraphQL', 'TypeScript', 'PHP', 'Laravel', 'Symfony', 'Python', 'Django', 'ORM', 'Sequelize', 'Mongoose', 'SQL', 'MVC', 'SASS', 'WordPress', 'Express', 'Deno', 'React Native', 'Flutter', 'MobX', 'C#', 'Ruby on Rails']
+            @endphp
+            
+            <lista-skills :skills="{{json_encode($skills)}}"></lista-skills>
+
+        </div>
         
         <button
             type="submit"
             class="bg-blue-500 w-full hover:bg-blue-600 text-gray-100 font-bold p-3 focus:outline focus:shadow-outline uppercase"
             >Publicar Vacante</button>
     </form>
+
+
+   
 @endsection
 
 @section('scripts')
