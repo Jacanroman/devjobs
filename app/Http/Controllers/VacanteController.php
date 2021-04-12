@@ -72,7 +72,19 @@ class VacanteController extends Controller
             'skills' => 'required'
         ]);
 
-        return "datos en el store";
+        //Almacenar en la BD
+        auth()->user()->vacantes()->create([
+            'titulo' => $data['titulo'],
+            'imagen' => $data['imagen'],
+            'descripcion' => $data['descripcion'],
+            'skills' => $data['skills'],
+            'categoria_id' => $data['categoria'],
+            'experiencia_id' => $data['experiencia'],
+            'ubicacion_id' => $data['ubicacion'],
+            'salario_id' => $data['salario'],
+        ]);
+
+        return redirect()->action('VacanteController@index');
     }
 
     /**
