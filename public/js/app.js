@@ -1845,6 +1845,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+var _props$mounted$data$c;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1872,8 +1876,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['skills'],
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_props$mounted$data$c = {
+  props: ['skills', 'oldskills'],
   mounted: function mounted() {
     console.log(this.skills);
   },
@@ -1882,28 +1887,48 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       habilidades: new Set()
     };
   },
-  methods: {
-    activar: function activar(e) {
-      //console.log('diste clik',e.target.textContent);
-      //le agregamos una clase 
-      if (e.target.classList.contains('bg-blue-400')) {
-        //El skill esta activo    
-        e.target.classList.remove('bg-blue-400'); //Eliminar el set de habilidades
+  created: function created() {
+    var _this = this;
 
-        this.habilidades["delete"](e.target.textContent);
-      } else {
-        e.target.classList.add('bg-blue-400'); //Agregar al Set de habilidades
+    //para marcar las skills que seleccionamos
+    if (this.oldskills) {
+      var skillsArray = this.oldskills.split(','); //lo almacenamos en un array
+      //console.log(skillsArray);
 
-        this.habilidades.add(e.target.textContent);
-      } //Agregar la habilidades al input hiddeen
-
-
-      var stringHabilidades = _toConsumableArray(this.habilidades);
-
-      document.querySelector('#skills').value = stringHabilidades;
+      skillsArray.forEach(function (skill) {
+        return _this.habilidades.add(skill);
+      });
     }
   }
-});
+}, _defineProperty(_props$mounted$data$c, "mounted", function mounted() {
+  console.log(this.oldskills); //asignar al input hidden
+
+  document.querySelector('#skills').value = this.oldskills;
+}), _defineProperty(_props$mounted$data$c, "methods", {
+  activar: function activar(e) {
+    //console.log('diste clik',e.target.textContent);
+    //le agregamos una clase 
+    if (e.target.classList.contains('bg-blue-400')) {
+      //El skill esta activo    
+      e.target.classList.remove('bg-blue-400'); //Eliminar el set de habilidades
+
+      this.habilidades["delete"](e.target.textContent);
+    } else {
+      e.target.classList.add('bg-blue-400'); //Agregar al Set de habilidades
+
+      this.habilidades.add(e.target.textContent);
+    } //Agregar la habilidades al input hiddeen
+
+
+    var stringHabilidades = _toConsumableArray(this.habilidades);
+
+    document.querySelector('#skills').value = stringHabilidades;
+  },
+  verificarClaseActiva: function verificarClaseActiva(skill) {
+    //console.log(skill);
+    return this.habilidades.has(skill) ? 'bg-blue-400' : '';
+  }
+}), _props$mounted$data$c);
 
 /***/ }),
 
@@ -37460,6 +37485,7 @@ var render = function() {
           {
             key: i,
             staticClass: "border border-gray-500 px-10 py-3 mb-3 rounded mr-4",
+            class: _vm.verificarClaseActiva(skill),
             on: {
               click: function($event) {
                 return _vm.activar($event)
