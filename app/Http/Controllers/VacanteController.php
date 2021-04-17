@@ -26,8 +26,16 @@ class VacanteController extends Controller
      */
     public function index()
     {
-        //
-        return view('vacantes.index');
+        /*
+        //para recoger las vacante se puede hacer con el auth user
+        $vacantes = auth()->user()->vacantes;
+        
+        */
+        //otro metodo para hacer lo anterior es con el modelo
+        $vacantes = Vacante::where('user_id', auth()->user()->id)->paginate(3);
+
+        //dd($vacantes);
+        return view('vacantes.index',compact('vacantes'));
     }
 
     /**
