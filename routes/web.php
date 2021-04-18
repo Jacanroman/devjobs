@@ -21,14 +21,20 @@ Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Rutas protegidas
 
-//Rutas de vacantes
+Route::group(['middleware'=>['auth','verified']], function(){
+    //Rutas de vacantes protegidas
+    Route::get('/vacantes', 'VacanteController@index')->name('vacantes.index');
+    Route::get('/vacantes/create', 'VacanteController@create')->name('vacantes.create');
+    Route::post('/vacantes','VacanteController@store')->name('vacantes.store');
 
-Route::get('/vacantes', 'VacanteController@index')->name('vacantes.index');
-Route::get('/vacantes/create', 'VacanteController@create')->name('vacantes.create');
-Route::post('/vacantes','VacanteController@store')->name('vacantes.store');
+    //Subir Imagenes
 
-//Subir Imagenes
+    Route::post('/vacantes/imagen','VacanteController@imagen')->name('vacantes.imagen');
+    Route::post('/vacantes/borrarimagen', 'VacanteController@borrarimagen')->name('vacantes.borrar');
+});
 
-Route::post('/vacantes/imagen','VacanteController@imagen')->name('vacantes.imagen');
-Route::post('/vacantes/borrarimagen', 'VacanteController@borrarimagen')->name('vacantes.borrar');
+//Rutas Vacantes sin proteger, Muestra los trabajos en el fron end sin autetificacion
+Route::get('/vacantes/{vacante}', 'VacanteController@show')->name('vacantes.show');
+
