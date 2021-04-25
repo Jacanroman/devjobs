@@ -48,8 +48,11 @@
             </div>
         </div>
 
-        <aside class="md:w-2/5">
-            2
+        <aside class="md:w-2/5 bg-gray-400 p-5 rounded m-3">
+            <h2 class="my-5 text-white uppercase font-bold text-center">Contacta al Reclutador</h2>
+        
+            <form>
+            </form>
         </aside>
     </div>
 @endsection
