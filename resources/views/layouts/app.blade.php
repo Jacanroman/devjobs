@@ -55,7 +55,7 @@
                             <span class="text-gray-300 text-sm pr-4">{{Auth::user()->name }}</span> 
 
                                 <a 
-                                    href=""
+                                    href="{{route('notificaciones')}}"
                                     class="bg-gray-500 rounded-full mr-2 px-3 py-2 font-bold text-sm text-white"
                                 >{{Auth::user()->unreadNotifications->count()}}</a>
 
