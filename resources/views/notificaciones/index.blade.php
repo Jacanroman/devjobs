@@ -20,6 +20,17 @@
                         Tienes un nuevo candidato en: 
                         <span class="font-bold">{{$data['vacante']}}</span>
                     </p>
+
+                    <p class="mb-4">
+                        Te escribio: 
+                        <span class="font-bold">{{$notificacion->created_at->diffForHumans()}}</span>
+                    </p>
+
+                    <a href="{{route('candidatos.index', ['id' => $data['id_vacante']])}}"
+                        class="bg-gray-500 p-3 inline-block text-xs font-bold uppercase text-white"
+                    >
+                        Ver Candidato
+                    </a>
                 </li>
                 
             @endforeach
