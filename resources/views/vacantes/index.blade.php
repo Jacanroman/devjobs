@@ -43,12 +43,15 @@
                         </div>
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                            {{$vacante->activa ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}}
-                        ">
-                            <!-- Si es uno le agregar Activa si no Inactiva-->
-                            {{$vacante->activa ? 'Activa' : 'Inactiva'}}
-                        </span>
+                       <!--Le pasamos el valor de $vacante->activa con el estado al componente estado-vacante
+                        cuando le pasamos vacante-id esta propiedad se lee en el componente como
+                        vacanteId
+                    -->
+                        <estado-vacante
+                            estado="{{$vacante->activa}}"
+                            vacante-id="{{$vacante->id}}"
+                       >
+                       </estado-vacante>
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
                         <a 
