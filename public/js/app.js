@@ -1869,8 +1869,21 @@ __webpack_require__.r(__webpack_exports__);
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
-        if (result.isConfirmed) {
-          _this.$swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+        if (result.value) {
+          var params = {
+            id: _this.vacanteId,
+            _method: 'delete'
+          }; //Enviar peticion a axios
+
+          axios.post("vacantes/".concat(_this.vacanteId), params).then(function (respuesta) {
+            //console.log(respuesta);
+            _this.$swal.fire('Deleted!', respuesta.data.mensaje, 'success'); //Eliminar del DOM
+
+
+            _this.$el.parentNode.parentNode.parentNode.removeChild(_this.$el.parentNode.parentNode);
+          })["catch"](function (error) {
+            console.log(error);
+          });
         }
       });
     }

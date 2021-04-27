@@ -23,12 +23,32 @@ export default{
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
-            if (result.isConfirmed) {
-                this.$swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
+            if (result.value) {
+
+                const params = {
+                    id: this.vacanteId,
+                    _method: 'delete'
+                }
+
+                //Enviar peticion a axios
+                axios.post(`vacantes/${this.vacanteId}`, params)
+                    .then(respuesta =>{
+                        //console.log(respuesta);
+
+                        this.$swal.fire(
+                            'Deleted!',
+                            respuesta.data.mensaje,
+                            'success'
+                        )
+
+                        //Eliminar del DOM
+                        this.$el.parentNode.parentNode.parentNode.removeChild(this.$el.parentNode.parentNode);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+
+               
             }
         })
            
