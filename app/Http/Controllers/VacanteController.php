@@ -117,7 +117,7 @@ class VacanteController extends Controller
      */
     public function edit(Vacante $vacante)
     {
-        //
+        $this->authorize('view', $vacante);
 
         //Consultas 
         //nos traemos todas las categorias usando el modelo Categoria
@@ -144,6 +144,7 @@ class VacanteController extends Controller
      */
     public function update(Request $request, Vacante $vacante)
     {
+        $this->authorize('update', $vacante);
         //
         //dd($request->all());
 
@@ -184,6 +185,7 @@ class VacanteController extends Controller
      */
     public function destroy(Vacante $vacante)
     {
+        $this->authorize('delete', $vacante);
         //
         //return response()->json($vacante);
 
