@@ -118,6 +118,20 @@ class VacanteController extends Controller
     public function edit(Vacante $vacante)
     {
         //
+
+        //Consultas 
+        //nos traemos todas las categorias usando el modelo Categoria
+        $categorias = Categoria::all();
+        $experiencias = Experiencia::all();
+        $ubicaciones = Ubicacion::all();
+        $salarios = Salario::all();
+        
+        return view('vacantes.edit')
+            //para a;adir a la vista la variable $categoria que tiene todas las categorias
+            ->with('categorias', $categorias)
+            ->with('experiencias', $experiencias)
+            ->with('ubicaciones',$ubicaciones)
+            ->with('salarios',$salarios);
     }
 
     /**
