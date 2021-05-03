@@ -13,9 +13,10 @@
     <h1 class="text-2xl text-center mt-10">Editar Vacante {{$vacante->titulo}}</h1>
 
 
-    <form  action="{{route('vacantes.store')}}" method="POST" class="max-w-lg mx-auto my-10">
+    <form  action="{{route('vacantes.update',['vacante' => $vacante->id])}}" method="POST" class="max-w-lg mx-auto my-10">
         
         @csrf
+        @method('PUT')
 
         <div class="mb-5">
             <label for="titulo" 
