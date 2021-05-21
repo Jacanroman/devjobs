@@ -58,5 +58,7 @@ Route::post('/candidatos/store', 'CandidatoController@store')->name('candidatos.
 Route::get('/candidatos/{id}','CandidatoController@index')->name('candidatos.index');
 
 //Rutas Vacantes sin proteger, Muestra los trabajos en el fron end sin autetificacion
+Route::get('/vacantesbusqueda/buscar', 'VacanteController@resultados')->name('vacantes.resultados');
+Route::post('/vacantesbusqueda/buscar', 'VacanteController@buscar')->name('vacantes.buscar');
 Route::get('/vacantes/{vacante}', 'VacanteController@show')->name('vacantes.show');
 
