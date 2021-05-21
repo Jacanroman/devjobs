@@ -31177,6 +31177,10 @@ video {
           animation: bounce 1s infinite;
 }
 
+body {
+  font-family: "Roboto", sans-serif;
+}
+
 .medium-editor-toolbar-active {
   visibility: visible;
   background: rgba(59, 130, 246, var(--tw-bg-opacity));
