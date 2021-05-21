@@ -15,6 +15,9 @@
             <h1 class="mt-2 sm:mt-4 text-3xl font-bold text-gray-700 leading-tight">
                 Encuentra un trabajo remoto o en tu pais 
                 <span class="text-blue-500 block">Para Desarrolladores Web</span>
+            </h1>
+
+            @include('ui.buscar')            
         </div>
 
         <div class="block lg:w-1/2">
