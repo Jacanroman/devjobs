@@ -11,7 +11,7 @@ class CategoriaController extends Controller
     //
     public function show(Categoria $categoria)
     {
-        $vacantes = Vacante::where('categoria_id', $categoria->id)->paginate(2);
+        $vacantes = Vacante::where('categoria_id', $categoria->id)->where('activa',true)->paginate(2);
         
         //dd($vacantes);
         

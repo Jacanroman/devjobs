@@ -33,7 +33,7 @@ class VacanteController extends Controller
         
         */
         //otro metodo para hacer lo anterior es con el modelo
-        $vacantes = Vacante::where('user_id', auth()->user()->id)->paginate(3);
+        $vacantes = Vacante::where('user_id', auth()->user()->id)->latest()->paginate(3);
 
         //dd($vacantes);
         return view('vacantes.index',compact('vacantes'));
@@ -105,7 +105,7 @@ class VacanteController extends Controller
     public function show(Vacante $vacante)
     {
         //
-
+        //if($vacante->activa === 0 ) return abort(404);
         return view('vacantes.show')->with('vacante', $vacante);
     }
 
@@ -233,9 +233,24 @@ class VacanteController extends Controller
         return response()->json(['respuesta' => 'correcto']);
     }
 
-    public function buscar()
+    public function buscar(Request $request)
     {
-        return 'buscado.....';
+        //validar
+        $data = $request->validate([
+            'categoria' => 'required',
+            'ubicacion' => 'required'
+        ]);
+
+        //Asignar valores
+        $categoria = $data['categoria'];
+        $ubicacion = $data['ubicacion'];
+
+        $vacantes = Vacante::latest()
+                    ->where('categoria_id', $categoria)
+                    ->where('ubicacion_id', $ubicacion)
+                    ->get();
+
+        return view('buscar.index', compact('vacantes'));
     }
 
     public function resultados()
