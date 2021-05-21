@@ -17,8 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['verify'=>true]);
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/','InicioController')->name('inicio');
+
 
 
 //Rutas protegidas
@@ -46,6 +45,12 @@ Route::group(['middleware'=>['auth','verified']], function(){
     Route::get('/notificaciones','NotificacionesController')->name('notificaciones');
 });
 
+//PAGINA DE INICIO
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/','InicioController')->name('inicio');
+
+//Categorias
+Route::get('/categorias/{categoria}', 'CategoriaController@show')->name('categorias.show');
 
 //Enviar datos para una vacante
 
